@@ -1,0 +1,23 @@
+---
+- 
+  hosts : centos1
+  user : ansible
+  gather_facts : false
+
+  vars :
+    motd : "Example data from YAML file \n"
+
+  tasks :
+    - name : Configure a motd
+      copy :
+        content : "{{ motd }}"
+        dest : /etc/motd
+
+    - name : line insert
+      lineinfile :
+        path : /etc/motd
+        line : 'Added Line 2 '
+        insertbefore : BOF
+
+...
+
